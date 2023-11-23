@@ -3,18 +3,14 @@
 "Best School" and  "Hi" on a new line.
 
 #Initialize the count
-count=0
+count=1
 
 #The while loop to display "Best School" 10 times
 while [ $count -lt 10 ]; do
-    #Check if it's the 9th iteration
-    if [ $count -eq 8 ]
+    echo "Best School"
+    if [ $count -eq 9 ]
     then
-        echo -e "Best School\nHi"
-    else
-        echo "Best School"
+    echo "Hi"
     fi
-
-    #Increment rhe count
     ((count++))
 done
