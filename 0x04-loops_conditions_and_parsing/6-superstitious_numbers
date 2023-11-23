@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# This script displays numbers from 1 to 20 with specific messages for
+# certain iterations.
+
+# Initialize the counter
+count=1
+
+# The while loop to iterate from 1 to 20
+while [ $count -le 20 ]; do
+    echo "$count"
+    case $count in
+        4)
+            echo "bad luck from China"
+            ;;
+        9)
+            echo "bad luck from Japan"
+            ;;
+        17)
+            echo "bad luck from Italy"
+            ;;
+    esac
+
+    # Increment the count
+    ((count++))
+done
+
