@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Installing Nginx on Server
+
+# Update and upgrade the package lists
+sudo apt-get update -y && sudo apt-get upgrade -y
+
+# Install Nginx
+sudo apt-get install -y nginx
+
+# Set ownership for directories
+sudo chown -R "$USER":"$USER" /var/www/
+sudo chown -R "$USER":"$USER" /etc/nginx
+
+# Create a simple index file
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+
+# Restart Nginx to apply changes
+sudo service nginx restart
