@@ -13,6 +13,6 @@ sudo /etc/init.d/nginx reload
 # Create an HTML file with the string "Hello World!"
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
-sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/Nyakuji permanent;/" /etc/nginx/sites-available/default
+sudo sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/Nyakuji permanent;/" /etc/nginx/sites-available/default
 # Restart Nginx without using systemctl
 sudo /etc/init.d/nginx restart

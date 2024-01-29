@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# Script that installs Nginx server and redirects /redirect_me
+sudo apt-get update -y
+sudo apt-get install -y nginx
+
+# Set Nginx to listen on port 80
+sudo sed -i 's/listen 80 default_server;/listen 80;/' /etc/nginx/sites-available/default
+
+# Reload Nginx configuration
+sudo /etc/init.d/nginx reload
+
+# Create an HTML file with the string "Hello World!"
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Create a custom 404 page
+echo "<html><head><title>404 Not Found</title></head><body><center><h1>404 Not Found</h1></center><hr><center>Ceci n'est pas une page</center></body></html>" | sudo tee /var/www/html/custom_404.html
+
+# Configure Nginx to use the custom 404 page
+sudo sed -i '/listen 80;/a \    error_page 404 /custom_404.html;\n    location = /custom_404.html {\n      root /var/www/html;\n      internal;\n    }' /etc/nginx/sites-available/default
+
+# Insert the redirection line after the server_name line
+line="\\\trewrite ^/redirect_me https://github.com/Nyakuji permanent;"
+sudo sed -i "/server_name _;/a $line" /etc/nginx/sites-available/default
+
+# Restart Nginx without using systemctl
+sudo /etc/init.d/nginx restart
