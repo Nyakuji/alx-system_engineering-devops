@@ -1,19 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# config ngnix server to listen to port 80
 
-# Update package lists
-sudo apt-get update
-
-# Install Nginx if not already installed
-sudo apt-get install -y nginx
-
-# Configure Nginx to listen on port 80
-sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
-
-# Allow traffic on port 80 in the firewall (if using ufw)
-sudo ufw allow 80
-
-# Restart Nginx
+sudo rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
-
-# Display Nginx status
-sudo service nginx status
